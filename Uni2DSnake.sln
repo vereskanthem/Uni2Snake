@@ -1,7 +1,7 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uni2DSnake", "Assembly-CSharp.csproj", "{55D3C930-2FC6-864B-7527-47625350AF7D}"
+# Visual Studio 2008
+
+Project("{EFD5327D-890F-927E-C29B-F44FDD320F6F}") = "Uni2DSnake", "Assembly-CSharp.csproj", "{55D3C930-2FC6-864B-7527-47625350AF7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,33 +3,15 @@ using System.Collections;
 
 public class FoodBlue : MonoBehaviour
 {
-	
-	IEnumerator Waiting (float secWait)
-	{
 
-		yield return new WaitForSeconds (secWait);
-
-	}
-
-	public IEnumerator Update()	{
-
-		yield return StartCoroutine(Waiting (5));
-
-	}
-
-    void OnTriggerEnter(Collider collider)
+    void OnTriggerEnter(Collider collider) //Событие срабатывает при столкновении с триггером
     {
-        if (collider.CompareTag("SnakeMain"))
+        if (collider.CompareTag("SnakeMain")) //Сравнивает с объектом с тегом "SnakeMain"
         {
-            collider.GetComponent<SnakeMovement>().AddTail1();
-
-			Update ();
-
-			collider.GetComponent<SnakeMovement>().DestroyTailObjects();
-
-            Destroy(gameObject);
-
-			FoodGeneration.currentFoodInField -= 1;
+            collider.GetComponent<SnakeMovement>().AddTail1(); //Добавляет синий хвост, вызывая функцию AddTail1
+			collider.GetComponent<SnakeMovement>().DestroyTailObjects(); //Вызывает функцию уничтожения 3-х одинаковых блоков
+            Destroy(gameObject); //Убирает еду с поля
+			FoodGeneration.currentFoodInField -= 1; //Уменьшает счетчик текущего количества еды на поле
         }
     }
 }

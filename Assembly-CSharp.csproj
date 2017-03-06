@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{55D3C930-2FC6-864B-7527-47625350AF7D}</ProjectGuid>
+    <ProjectGuid>{D5DD6A9C-0727-AA90-96A6-B397EC87FCCA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -51,9 +51,11 @@
      <Compile Include="Assets\Scripts\FoodGeneration.cs" />
      <Compile Include="Assets\Scripts\FoodGreen.cs" />
      <Compile Include="Assets\Scripts\FoodRed.cs" />
+     <Compile Include="Assets\Scripts\GameOptions.cs" />
+     <Compile Include="Assets\Scripts\RestartGame.cs" />
+     <Compile Include="Assets\Scripts\Rotate.cs" />
      <Compile Include="Assets\Scripts\SnakeMovement.cs" />
      <Compile Include="Assets\Scripts\TailMovement.cs" />
-     <Compile Include="Assets\Scripts\WaitForSec.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
