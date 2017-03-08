@@ -6,7 +6,7 @@ public class TailMovement : MonoBehaviour {
 
     public float speed; //Скорость движения хвоста
     public Vector3 tailTarget; //Позиция объекта за которым следует хвост
-    public int indx; 
+    public int indx; //Количество объектов хвоста
     public GameObject tailTargetObj; 
     public SnakeMovement mainSnake;
     void Start ()
@@ -33,4 +33,5 @@ public class TailMovement : MonoBehaviour {
             }
         }
     }
+
 }

@@ -14,17 +14,20 @@ public class SnakeMovement : MonoBehaviour {
     public GameObject tailPrefab3; //Определяем красный хвост как префаб
     public float z_offset = 0.3f; //Отсуп при начальном появлении хвоста
     public Text ScoreText; //Переменная текста счета для UI
-    public int score = 0; //Начальное значение счета
+    public static int score = 0; //Начальное значение счета
     public float timer; //Переменная для времени
     public Text TimeText; //Переменная текста времени для UI
 
 	private List<string> endOfTail = new List<string>();
 
 	void Start () {
+		
         timer = 0; //Устанавливаем таймер в 0
         tailObject.Add(gameObject); 
+
 		FoodGeneration.currentFoodInField = 0; //Стартовое количество еды на поле = 0
 		FoodGeneration.FoodCount = 0;
+
 	}
 	
 	void Update ()
@@ -180,7 +183,7 @@ public class SnakeMovement : MonoBehaviour {
 
 	}
 
-    public  void SetCountText()	{
+    public void SetCountText()	{
 		
         ScoreText.text = "Score: " + score.ToString();
 

@@ -5,8 +5,13 @@
       <File FileName="Assets/Scripts/FoodGreen.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/RestartGame.cs" Line="11" Column="3" />
       <File FileName="Assets/Scripts/GameOptions.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/FoodGeneration.cs" Line="17" Column="29" />
-      <File FileName="Assets/Scripts/SnakeMovement.cs" Line="14" Column="35" />
+      <File FileName="Assets/Scripts/FoodGeneration.cs" Line="67" Column="3" />
+      <File FileName="Assets/Scripts/SnakeMovement.cs" Line="29" Column="17" />
+      <File FileName="Assets/Scripts/Borders.cs" Line="13" Column="6" />
+      <File FileName="Assets/Scripts/FoodBlue.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/FoodRed.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Rotate.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TailMovement.cs" Line="17" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -14,40 +14,51 @@ public class FoodGeneration : MonoBehaviour
     public static GameObject curFood3; //Переменная для появившейся на поле красной еды
     public Vector3 curPos1; //Коордианат появления еды
     public static int FoodType; //Переменная, определяющая тип еды
-	public static int FoodCount = 0; //Общее количество съеденной еды
+	public static uint FoodCount = 0; //Общее количество съеденной еды
 	public static int maxFoodInField = 1; //Максимальное количество еды на поле
-	public static int currentFoodInField = 0; //Текущее количество еды на поле
+	public static uint currentFoodInField = 0; //Текущее количество еды на поле
 
-    void AddNewFood1() //Функция добавления еды
+	public void AddNewFood1() //Функция добавления еды
     {
         RandomType(); //Вызов функции определния типа еды
         if (FoodType == 1)
         {
             RandomPos(); //Вызов функции случайной координаты появления еды
-            curFood1 = GameObject.Instantiate(food1Prefab, curPos1, Quaternion.identity) as GameObject; //Создаем синюю еду на поле
-			FoodCount++; //Увеличиваем счетчик подобранной еды на 1
+           
+			//if()	{
+
+				curFood1 = GameObject.Instantiate(food1Prefab, curPos1, Quaternion.identity) as GameObject; //Создаем синюю еду на поле
+				//curFoodTrigger = true;
+
+			//}	else {
+
+
+
+			//}
+
+			//FoodCount++; //Увеличиваем счетчик подобранной еды на 1
         }
         if (FoodType == 2) //Аналогично прдедущему
         {
             RandomPos();
             curFood2 = GameObject.Instantiate(food2Prefab, curPos1, Quaternion.identity) as GameObject;
-			FoodCount++;
+			//FoodCount++;
         }
         if (FoodType == 3)
         {
             RandomPos();
             curFood3 = GameObject.Instantiate(food3Prefab, curPos1, Quaternion.identity) as GameObject;
-			FoodCount++;
+			//FoodCount++;
         }
 			
     }
 
-    void RandomPos() //Функция определения случайной координаты
+    public void RandomPos() //Функция определения случайной координаты
     {
         curPos1 = new Vector3(Random.Range(XSize * -1, XSize), 0.25f, Random.Range(ZSize * -1, ZSize));
     }
 
-    void RandomType() //Функция выбора цвета еды
+	public void RandomType() //Функция выбора цвета еды
     {
         FoodType = Random.Range(1, 4); //Случайное значение от 1 до 3
     }
@@ -56,44 +67,29 @@ public class FoodGeneration : MonoBehaviour
         //Функция увеличения количества еды
 		if (FoodCount < 5) {
 
-			maxFoodInField = 1; //Максимальное количество еды до 5 собрынных = 1
+			maxFoodInField = 1; //Максимальное количество еды до 5 собранных = 1
 
-			if (!curFood1 && !curFood2 && !curFood3) { //Если нет еды на поле - создаем и увеличиваем счетчик текущей еды
-				 
+			if (currentFoodInField == 0) {
+				
 				AddNewFood1 ();
 				currentFoodInField += 1;
+		
+
 			}
+	
 		}
 
-		if (FoodCount >= 5) { //Максимальное количество еды после 5 собранных = 2
+		if ((FoodCount >= 5) && (FoodCount < 15)) { //Максимальное количество еды после 5 собранных = 2
 
 			maxFoodInField = 2;
 
-			if (!curFood1 && !curFood2 && !curFood3) { //Для первой появившейся спауним по предыдущему правилу
-
-				if (currentFoodInField == 0) {
-					
-					for (int i = 0; i < maxFoodInField; i++) {
-
-						AddNewFood1 ();
-						currentFoodInField += 1;
-
-					}
-
-				}
-
-			}
-
-			if (((!curFood1 && !curFood2) || (!curFood2 && !curFood3) || (!curFood1 && !curFood3)) ) { //Если любая из типов еды есть - спауним еще одну
-
-				if (currentFoodInField < maxFoodInField) { //Спауним пока не превысит максимальное количество
+			if (currentFoodInField < maxFoodInField) { //Спауним пока не превысит максимальное количество
 					
 					AddNewFood1 ();
 					currentFoodInField += 1;
 
 				}
 
-			}
 
 		}
 
@@ -101,32 +97,13 @@ public class FoodGeneration : MonoBehaviour
 
 			maxFoodInField = 3;
 
-			if (!curFood1 && !curFood2 && !curFood3) {
-
-				if (currentFoodInField == 0) {
-
-					for (int i = 0; i < maxFoodInField; i++) {
-
-						AddNewFood1 ();
-						currentFoodInField += 1;
-						
-					}
-
-				}
-
-			}
-
-			if (((!curFood1) || (!curFood2) || (!curFood3))) {
-
 				if (currentFoodInField < maxFoodInField) {
-					//GenerateNewFood ();
+
 					AddNewFood1 ();
-					//print ("ADD COMPLETE !!");
 					currentFoodInField += 1;
 
-				}
 
-			}
+				}
 
 		}
     }

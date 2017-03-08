@@ -11,7 +11,11 @@ public class FoodGreen : MonoBehaviour
             collider.GetComponent<SnakeMovement>().AddTail2();
 			collider.GetComponent<SnakeMovement>().DestroyTailObjects();
             Destroy(gameObject);
+
 			FoodGeneration.currentFoodInField -= 1;
+			FoodGeneration.FoodCount += 1;
+
+			print (FoodGeneration.FoodCount);
         }
     }
 }
