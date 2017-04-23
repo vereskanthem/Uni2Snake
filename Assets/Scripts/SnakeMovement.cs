@@ -24,8 +24,8 @@ public class SnakeMovement : MonoBehaviour {
 
 	private int BlueCountForDelete  = 3;
 	private int GreenCountForDelete = 3;
-	private int RedCountForDelete   = 3;
-	private int RedCountForHook     = 3;
+	// private int RedCountForDelete   = 3;
+	// private int RedCountForHook     = 3;
 
 	private bool redPlusTrigger;
 
@@ -42,8 +42,8 @@ public class SnakeMovement : MonoBehaviour {
 	
 		BlueCountForDelete  = 3;
 		GreenCountForDelete = 3;
-		RedCountForDelete   = 3;
-		RedCountForHook     = 3;
+		//RedCountForDelete   = 3;
+		//RedCountForHook     = 3;
 
 		redPlusTrigger = false;
 
@@ -98,7 +98,7 @@ public class SnakeMovement : MonoBehaviour {
         BonusText.text = "Blue bonus!";
         BonusText.color = Color.blue;
         Time.timeScale = 0.5f;
-        coroutine = BonusPause(5.0f);
+        coroutine = BonusPause(2.0f);
         StartCoroutine(coroutine);
     }
 
@@ -133,7 +133,7 @@ public class SnakeMovement : MonoBehaviour {
         yield return new WaitForSeconds(waitTime);
         multi = 1;
         Time.timeScale = 1;
-        BonusText.text = " ";
+        BonusText.text = "";
         BonusText.color = Color.white;
     }
 
@@ -186,9 +186,7 @@ public class SnakeMovement : MonoBehaviour {
 
 				//for(int j = 0; j < CountOfRemainingElements; j++)	{
 
-				//coroutine = CreatePause(5.0f);
-
-				yield return new WaitForSeconds (1.0f);
+				yield return new WaitForSeconds (0.02f);
 
 				// Food1 - Синий цвет, Food2 - Зеленый цвет, Food3 - Красный цвет
 				if(massiveOfRemainingElements.ElementAt(j) == "Food1")	{
@@ -384,7 +382,7 @@ public class SnakeMovement : MonoBehaviour {
 
 							tailObject.RemoveAt(j);
 
-							print("BANG! - " + (j));
+							// print("BANG! - " + (j));
 
 						}
 
@@ -399,11 +397,11 @@ public class SnakeMovement : MonoBehaviour {
 
 						// Потом создадим его заново из элементов, которые имеют отличный от последнего элемента в хвосте цвет
 
-					}
+						print("Spelling Effect for RED Food (3 red + 1 any color)!");
+						RedPlusBonus();
+						// Здесь можно написать код, который относится к вызову эффекта после удаления красных
 
-					print("Spelling Effect for RED Food (3 red + 1 any color)!");
-					RedPlusBonus();
-					// Здесь можно написать код, который относится к вызову эффекта после удаления красных
+					}
 
 				}
 

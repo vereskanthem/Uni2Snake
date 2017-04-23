@@ -79,7 +79,6 @@ public class FoodGeneration : MonoBehaviour
                 AddNewFood1();
                 currentFoodInField += 1;
 
-
             }
 
         }

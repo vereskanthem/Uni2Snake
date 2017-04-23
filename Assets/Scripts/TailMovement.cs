@@ -13,7 +13,7 @@ public class TailMovement : MonoBehaviour {
     void Start ()
     {
         mainSnake = GameObject.FindGameObjectWithTag("SnakeMain").GetComponent<SnakeMovement>();
-        tailspeed = mainSnake.speed + 0.5f;
+        tailspeed = mainSnake.speed + 1.0f;
         //tailspeed = SnakeMovement.speed + 0.5f;
         tailTargetObj = mainSnake.tailObject[mainSnake.tailObject.Count-2];
         indx = mainSnake.tailObject.IndexOf(gameObject);
