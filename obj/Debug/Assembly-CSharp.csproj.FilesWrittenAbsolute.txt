@@ -1,46 +1,25 @@
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/Assembly-CSharp.dll.mdb
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/Assembly-CSharp.pdb
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/Assembly-CSharp.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/obj/Debug/Assembly-CSharp.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/obj/Debug/Assembly-CSharp.dll.mdb
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/obj/Debug/Assembly-CSharp.pdb
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/UnityEngine.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/UnityEditor.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/UnityEngine.UI.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/UnityEngine.Networking.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/UnityEngine.PlaymodeTestsRunner.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/UnityEngine.Analytics.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/UnityEngine.HoloLens.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/UnityEngine.VR.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/Unity.DataContract.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/Mono.Cecil.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/Unity.SerializationLogic.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/ICSharpCode.NRefactory.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/Unity.UNetWeaver.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/Unity.CecilTools.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/Mono.Cecil.Pdb.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Uni2DSnake test/Temp/bin/Debug/Mono.Cecil.Mdb.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/Assembly-CSharp.dll.mdb
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/Assembly-CSharp.pdb
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/Assembly-CSharp.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/obj/Debug/Assembly-CSharp.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/obj/Debug/Assembly-CSharp.dll.mdb
-/home/nlare/_code/Unity3D/Uni2DSnake test/obj/Debug/Assembly-CSharp.pdb
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/UnityEngine.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/UnityEditor.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/UnityEngine.UI.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/UnityEngine.Networking.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/UnityEngine.PlaymodeTestsRunner.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/UnityEngine.Analytics.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/UnityEngine.HoloLens.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/UnityEngine.VR.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/Unity.DataContract.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/Mono.Cecil.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/Unity.SerializationLogic.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/ICSharpCode.NRefactory.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/Unity.UNetWeaver.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/Unity.CecilTools.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/Mono.Cecil.Pdb.dll
-/home/nlare/_code/Unity3D/Uni2DSnake test/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/home/nlare/_code/Unity3D/snake/obj/Debug/Assembly-CSharp.dll
+/home/nlare/_code/Unity3D/snake/obj/Debug/Assembly-CSharp.pdb
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/UnityEngine.Advertisements.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/Assembly-CSharp.pdb
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/Assembly-CSharp.dll
+/home/nlare/_code/Unity3D/snake/obj/Debug/Assembly-CSharp.dll.mdb
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/UnityEngine.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/UnityEditor.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/UnityEngine.UI.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/UnityEngine.Networking.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/UnityEngine.TestRunner.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/nunit.framework.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/UnityEngine.Analytics.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/UnityEngine.HoloLens.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/UnityEngine.VR.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/Unity.DataContract.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/Mono.Cecil.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/Unity.SerializationLogic.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/Unity.UNetWeaver.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/Unity.CecilTools.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/home/nlare/_code/Unity3D/snake/Temp/bin/Debug/Mono.Cecil.Mdb.dll

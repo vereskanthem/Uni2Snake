@@ -8,7 +8,7 @@ public class FoodGreen : MonoBehaviour
     {
         if (collider.CompareTag("SnakeMain"))
         {
-            collider.GetComponent<SnakeMovement>().AddTail2();
+			collider.GetComponent<SnakeMovement>().AddTail("Green");
 			collider.GetComponent<SnakeMovement>().DestroyTailObjects();
             Destroy(gameObject);
 

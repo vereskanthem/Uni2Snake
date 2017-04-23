@@ -8,7 +8,7 @@ public class FoodBlue : MonoBehaviour
     {
         if (collider.CompareTag("SnakeMain")) //Сравнивает с объектом с тегом "SnakeMain"
         {
-            collider.GetComponent<SnakeMovement>().AddTail1(); //Добавляет синий хвост, вызывая функцию AddTail1
+            collider.GetComponent<SnakeMovement>().AddTail("Blue"); //Добавляет синий хвост, вызывая функцию AddTail1
 			collider.GetComponent<SnakeMovement>().DestroyTailObjects(); //Вызывает функцию уничтожения 3-х одинаковых блоков
             Destroy(gameObject); //Убирает еду с поля
 

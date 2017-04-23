@@ -14,179 +14,463 @@ public class SnakeMovement : MonoBehaviour {
     public GameObject tailPrefab3; //Определяем красный хвост как префаб
     public float z_offset = 0.3f; //Отсуп при начальном появлении хвоста
     public Text ScoreText; //Переменная текста счета для UI
-    public static int score = 0; //Начальное значение счета
+    public int score = 0; //Начальное значение счета
     public float timer; //Переменная для времени
-    public Text TimeText; //Переменная текста времени для UI
+    //public Text TimeText; //Переменная текста времени для UI
+    public Text BonusText;//Переменная текста для бонуса
+    private int BonusType; //Тип бонуса
+    private int multi = 1; //Множитель очков
+    private IEnumerator coroutine;
 
-	private List<string> endOfTail = new List<string>();
+	private int BlueCountForDelete  = 3;
+	private int GreenCountForDelete = 3;
+	private int RedCountForDelete   = 3;
+	private int RedCountForHook     = 3;
 
-	void Start () {
-		
+	private bool redPlusTrigger;
+
+    //private List<string> endOfTail = new List<string>();
+    private string colorOfDestroyingTail;
+
+    void Start() {
+
         timer = 0; //Устанавливаем таймер в 0
-        tailObject.Add(gameObject); 
-
-		FoodGeneration.currentFoodInField = 0; //Стартовое количество еды на поле = 0
-		FoodGeneration.FoodCount = 0;
-
-	}
+        BonusText.text = " ";
+        tailObject.Add(gameObject);
+        FoodGeneration.currentFoodInField = 0; //Стартовое количество еды на поле = 0
+        FoodGeneration.FoodCount = 0;
 	
-	void Update ()
+		BlueCountForDelete  = 3;
+		GreenCountForDelete = 3;
+		RedCountForDelete   = 3;
+		RedCountForHook     = 3;
+
+		redPlusTrigger = false;
+
+    }
+
+    void Update()
     {
         SetCountText();//Вызываем функцию отображающую счет
-        timer = timer + Time.deltaTime; //Отображаем время
+        //timer = timer + Time.deltaTime; //Отображаем время
         //Красивое оформление времени
-        int minutes = Mathf.FloorToInt(timer / 60F);
-        int seconds = Mathf.FloorToInt(timer - minutes * 60);
-        string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
-        TimeText.text = "Time: " + niceTime;
+        //int minutes = Mathf.FloorToInt(timer / 60F);
+        //int seconds = Mathf.FloorToInt(timer - minutes * 60);
+        //string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+        //TimeText.text = "Time: " + niceTime;
 
         transform.Translate(Vector3.forward * speed * Time.deltaTime); //Постоянное движение змеи вперед со скоростью speed
 
-        if(Input.GetKey(KeyCode.D)) 
+        if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(Vector3.up*rotspeed*Time.deltaTime); //Поворот направо со скоростью rotspeed
+            transform.Rotate(Vector3.up * rotspeed * Time.deltaTime); //Поворот направо со скоростью rotspeed
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.up*-1 * rotspeed * Time.deltaTime); //Поворот налево со скоростью rotspeed
+            transform.Rotate(Vector3.up * -1 * rotspeed * Time.deltaTime); //Поворот налево со скоростью rotspeed
         }
+		if (Input.GetKey(KeyCode.RightArrow))
+		{
+			transform.Rotate(Vector3.up * rotspeed * Time.deltaTime); //Поворот направо со скоростью rotspeed
+		}
+		if (Input.GetKey(KeyCode.LeftArrow))
+		{
+			transform.Rotate(Vector3.up * -1 * rotspeed * Time.deltaTime); //Поворот налево со скоростью rotspeed
+		}
     }
 
-    public void AddTail1() //Функция добавления синего хвоста
+    public void setSpeed(float _speed)
     {
-        score++; //Увеличиваем счет
-        SetCountText();
-        Vector3 newTailPos = tailObject[tailObject.Count-1].transform.position; //Определяем позицию хвоста
 
-        newTailPos.z -= z_offset; //Позиция хвоста - на расстоянии z_offset от предыдущего элемента
-     
-		endOfTail.Add (tailPrefab1.tag); //Даем tag синему хвосту
+        speed = _speed;
 
-        tailObject.Add(Instantiate(tailPrefab1, newTailPos, Quaternion.identity) as GameObject); //Добавляем синий хвост как объект на сцену
     }
-    public void AddTail2() //Тоже самое для зеленого
+
+    public void SetCountText()
     {
-        score++;
-        SetCountText();
-        Vector3 newTailPos = tailObject[tailObject.Count - 1].transform.position;
 
-        newTailPos.z -= z_offset;
+        ScoreText.text = "Score: " + score.ToString();
 
-		endOfTail.Add (tailPrefab2.tag);
-
-        tailObject.Add(Instantiate(tailPrefab2, newTailPos, Quaternion.identity) as GameObject);
     }
-    public void AddTail3() //Тоже самое для синего
+
+    void BlueBonus()
     {
-        score++;
-        SetCountText();
-        Vector3 newTailPos = tailObject[tailObject.Count - 1].transform.position;
-
-        newTailPos.z -= z_offset;
-
-		endOfTail.Add (tailPrefab3.tag);
-
-        tailObject.Add(Instantiate(tailPrefab3, newTailPos, Quaternion.identity) as GameObject);
+        BonusText.text = "Blue bonus!";
+        BonusText.color = Color.blue;
+        Time.timeScale = 0.5f;
+        coroutine = BonusPause(5.0f);
+        StartCoroutine(coroutine);
     }
 
-	public bool CheckTail()	{
+    void RedBonus()//Красный бонус
+    {
+        BonusText.text = "Red bonus!";
+        BonusText.color = Color.red;
+        //multi = 2;
+        coroutine = BonusPause(5.0f);
+        StartCoroutine(coroutine);
+    }
 
-		//print ("endOfTail = " + endOfTail.Count);
+	void RedPlusBonus()//Красный+ бонус
+	{
+		BonusText.text = "RedPlus bonus!";
+		BonusText.color = Color.red;
+		coroutine = BonusPause(5.0f);
+		StartCoroutine(coroutine);
+	}
 
-		//if (endOfTail.Count > 3) {
+    void GreenBonus()
+    {
+        BonusText.text = "Green bonus!";
+        BonusText.color = Color.green;
+        //Игнорирование препятствий
+        coroutine = BonusPause(5.0f);
+        StartCoroutine(coroutine);
+    }
 
-		//print ("endOfTail = " + endOfTail.Count);
+    private IEnumerator BonusPause(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        multi = 1;
+        Time.timeScale = 1;
+        BonusText.text = " ";
+        BonusText.color = Color.white;
+    }
 
-		//	endOfTail.RemoveAt(0);
+	public void AddTail(string ColorOfFood)		{
 
-		//}
+		score++;
 
-		print ("tailObject.Count = " + tailObject.Count);
+		SetCountText();
+
+		Vector3 newTailPos = tailObject[tailObject.Count - 1].transform.position;
+
+		newTailPos.z -= z_offset;
+
+		//endOfTail.Add (tailPrefab3.tag);
+
+		if (ColorOfFood == "Blue") {
+
+			tailObject.Add (Instantiate (tailPrefab1, newTailPos, Quaternion.identity) as GameObject);
+
+		}
+
+		if (ColorOfFood == "Green") {
+
+			tailObject.Add (Instantiate (tailPrefab2, newTailPos, Quaternion.identity) as GameObject);
+
+		}
+
+		if (ColorOfFood == "Red") {
+
+			tailObject.Add (Instantiate (tailPrefab3, newTailPos, Quaternion.identity) as GameObject);
+
+		}
+
+	}
+
+	// Метод, который относится только к красному эффекту (RedPlus).
+	// Добавляет обратно элементы, которые должны были остаться после уничтожения элеемнтов определенного цвета.
+	private IEnumerator AddRemainingTailElements(List<string> massiveOfRemainingElements)	{
+
+		// Сколько у нас в массиве оставшихся элементов? 
+		int CountOfRemainingElements = massiveOfRemainingElements.Count;
+
+		print("CountOfRemainingElements: " + CountOfRemainingElements);
+
+		// Проверка на то, что в массиве оставшихся есть хоть что-то
+		if(CountOfRemainingElements != 0)	{
+
+			// Добавим в хвост нужные элементы
+			for(int j = CountOfRemainingElements-1; j >= 0; j--)	{
+
+				//for(int j = 0; j < CountOfRemainingElements; j++)	{
+
+				//coroutine = CreatePause(5.0f);
+
+				yield return new WaitForSeconds (1.0f);
+
+				// Food1 - Синий цвет, Food2 - Зеленый цвет, Food3 - Красный цвет
+				if(massiveOfRemainingElements.ElementAt(j) == "Food1")	{
+
+					print("BLUE" + massiveOfRemainingElements.ElementAt(j));
+
+					Vector3 newTailPos = tailObject[tailObject.Count - 1].transform.position;
+
+					newTailPos.z -= z_offset;
+
+					//endOfTail.Add (tailPrefab3.tag);
+
+					tailObject.Add(Instantiate(tailPrefab1, newTailPos, Quaternion.identity) as GameObject);
+
+				}
+
+				if(massiveOfRemainingElements.ElementAt(j) == "Food2")	{
+
+					print("GREEN" + massiveOfRemainingElements.ElementAt(j));
+
+					Vector3 newTailPos = tailObject[tailObject.Count - 1].transform.position;
+
+					newTailPos.z -= z_offset;
+
+					//endOfTail.Add (tailPrefab3.tag);
+
+					tailObject.Add(Instantiate(tailPrefab2, newTailPos, Quaternion.identity) as GameObject);
+
+				}
+
+				if(massiveOfRemainingElements.ElementAt(j) == "Food3")	{
+
+					print("RED" + massiveOfRemainingElements.ElementAt(j));
+
+					Vector3 newTailPos = tailObject[tailObject.Count - 1].transform.position;
+
+					newTailPos.z -= z_offset;
+
+					//endOfTail.Add (tailPrefab3.tag);
+
+					tailObject.Add(Instantiate(tailPrefab3, newTailPos, Quaternion.identity) as GameObject);
+
+				}
+
+			}
+
+		}
+
+	}
+
+	public string CheckTail()	{
+
+		// print ("tailObject.Count = " + tailObject.Count);
 
 		if (tailObject.Count >= 4) {
 
 			if ((tailObject.ElementAt(tailObject.Count-1).tag == tailObject.ElementAt(tailObject.Count-2).tag) && (tailObject.ElementAt(tailObject.Count-2).tag == tailObject.ElementAt(tailObject.Count-3).tag))	{
 
-				print ("CHECK !!");
+				if ((tailObject.ElementAt (tailObject.Count - 1).tag == "Food1") && (tailObject.ElementAt (tailObject.Count - 2).tag == "Food1") && (tailObject.ElementAt (tailObject.Count - 3).tag == "Food1")) {
 
-				//for (int i = endOfTail.Count-1; i == 0 ; i--) {
+					return "Blue";
 
-				//	endOfTail.RemoveAt (endOfTail.Count-1);
+				}
 
-				//}
+				if ((tailObject.ElementAt (tailObject.Count - 1).tag == "Food2") && (tailObject.ElementAt (tailObject.Count - 2).tag == "Food2") && (tailObject.ElementAt (tailObject.Count - 3).tag == "Food2")) {
 
-				//endOfTail.RemoveAt (endOfTail.Count-1);
-				//endOfTail.RemoveAt (endOfTail.Count-2);
-				//endOfTail.RemoveAt (endOfTail.Count-3);
+					return "Green";
 
-				return true;
+				}
 
-			} else {
+				if ((redPlusTrigger == false) && (tailObject.ElementAt (tailObject.Count - 1).tag == "Food3") && (tailObject.ElementAt (tailObject.Count - 2).tag == "Food3") && (tailObject.ElementAt (tailObject.Count - 3).tag == "Food3")) {
+					// Чтобы при наборе большего числа красных элементов не срабатывал постоянно хук на "Red"
+					// Ибо нужно чтобы следующим после Red сработал RedPlus
+					redPlusTrigger = true;
 
-				//print ("TailHook is consist of DIFFERENT elements!");
+					return "Red";
 
-				return false;
+				}
+
+			}
+
+			if ((tailObject.Count >= 5) && (redPlusTrigger = true)) {
+
+				if ((tailObject.ElementAt (tailObject.Count - 2).tag == tailObject.ElementAt (tailObject.Count - 3).tag) && (tailObject.ElementAt (tailObject.Count - 3).tag == tailObject.ElementAt (tailObject.Count - 4).tag)) {
+
+					if ((tailObject.ElementAt (tailObject.Count - 2).tag == "Food3") && (tailObject.ElementAt (tailObject.Count - 3).tag == "Food3") && (tailObject.ElementAt (tailObject.Count - 4).tag == "Food3")) {
+						// Сбросим хук на Red на false, теперь в него можно войти и метод может вернуть "Red"
+						redPlusTrigger = false;
+
+						return "RedPlus";
+
+					}
+
+				}
 
 			}
 
 		}
 
-		return false;
+		return "None";
 
 	}
 
-	public void DestroyTailObjects()	{
+	public void DeleteEndOfTail(string FoodColor)	{
 
-		if (CheckTail ()) {
+		string ColorOfLastTailElement;
 
-			//print ("Destroing THREE elements for test:");
-			print ("TRUE !! tailObject size:  " + tailObject.Count);
+		try {
 
-			try {
+			if(tailObject.Count >= 4)	{
 
-				if(tailObject.Count >= 4)	{
+				if (tailObject.ElementAt (tailObject.Count - 1) != null) {
 
-					for(int j = 0; j < 3; j++)	{
+					// Food1 - Синий цвет, Food2 - Зеленый цвет, Food3 - Красный цвет
+					if(FoodColor == "Blue")	{
 
-						if (tailObject.ElementAt (tailObject.Count - 1) != null) {
+						for(int j = 0; j < BlueCountForDelete; j++)	{
 
 							print("Remove obj:" + tailObject.ElementAt(tailObject.Count - 1).tag + " #" + (tailObject.Count - 1)); // tailObject.RemoveAt (3);
+
+							colorOfDestroyingTail = tailObject.ElementAt(tailObject.Count - 1).tag;
+
+							print("Color: " + colorOfDestroyingTail);
 
 							DestroyObject(tailObject.ElementAt (tailObject.Count-1));
 
 							tailObject.RemoveAt(tailObject.Count-1);
 
-
 						}
+
+						print("Spelling Effect fo BLUE Food!");
+						BlueBonus();
+
+						// Здесь можно написать код, который относится к вызову эффекта после удаления синих
 
 					}
 
-					score = score + 10;
+					if(FoodColor == "Green")	{
 
-					//if (tailObject.ElementAt (tailObject.Count - 2) != null) print("Remove obj:" + tailObject.ElementAt(tailObject.Count - 2).tag + " #" + (tailObject.Count - 2));
-					//if (tailObject.ElementAt (tailObject.Count - 3) != null) print("Remove obj:" + tailObject.ElementAt(tailObject.Count - 3).tag + " #" + (tailObject.Count - 3));
+						for(int j = 0; j < GreenCountForDelete; j++)	{
+
+							print("Remove obj:" + tailObject.ElementAt(tailObject.Count - 1).tag + " #" + (tailObject.Count - 1)); // tailObject.RemoveAt (3);
+
+							colorOfDestroyingTail = tailObject.ElementAt(tailObject.Count - 1).tag;
+
+							print("Color: " + colorOfDestroyingTail);
+
+							DestroyObject(tailObject.ElementAt (tailObject.Count-1));
+
+							tailObject.RemoveAt(tailObject.Count-1);
+
+						}
+						print("Spelling Effect fo GREEN Food!");
+						GreenBonus();
+
+						// Здесь можно написать код, который относится к вызову эффекта после удаления зеленых
+
+					}
+
+					if(FoodColor == "RedPlus")	{
+
+						// Вычисляем какого цвета последний элемент в хвосте и будем удалять только такие же по цвету элементы из хвоста
+						ColorOfLastTailElement = tailObject.ElementAt(tailObject.Count - 1).tag;
+
+						// Массив для сохранения тегов элементов, которые должны остаться
+						List<string> massiveOfRemainingElements = new List<string>();
+						// Счетчик на количество сохраненных элементов
+						int SavedCount = 0;
+						// Сначала запомним элементы, которые должны остаться
+						// j = (tailObject.Count - 5) - чтобы не учитывать красное комбо и последний элемент
+
+						print("tailObject.Count: " + tailObject.Count);
+						print("colorOfLastTailElement: " + ColorOfLastTailElement);
+						for(int j = (tailObject.Count - 5); j > 0 ; j--)	{
+
+							// Если у нас цвет (тег) не такой же, как цвет (тег цвета) последнего элемента, то сохраним в коллекцию
+							if(tailObject.ElementAt(j).tag != ColorOfLastTailElement)	{
+
+								massiveOfRemainingElements.Add(tailObject.ElementAt(j).tag);
+
+								SavedCount += 1;
+								print("Saved: " + SavedCount + " :: " + tailObject.ElementAt(j).tag);
+
+							}
+
+						}
+
+						print("massiveOfRemainingElements: " + massiveOfRemainingElements.Count); 
+						// Удалим весь хвост
+						for(int j = (tailObject.Count - 1); j > 0; j--)	{
+
+							DestroyObject(tailObject.ElementAt (j));
+
+							tailObject.RemoveAt(j);
+
+							print("BANG! - " + (j));
+
+						}
+
+						StartCoroutine(AddRemainingTailElements(massiveOfRemainingElements));
+
+						//for(int k = 1; k < (tailObject.Count - 1); k++)	{
+
+						//	DestroyObject(tailObject.ElementAt (k));
+
+						//}
+
+
+						// Потом создадим его заново из элементов, которые имеют отличный от последнего элемента в хвосте цвет
+
+					}
+
+					print("Spelling Effect for RED Food (3 red + 1 any color)!");
+					RedPlusBonus();
+					// Здесь можно написать код, который относится к вызову эффекта после удаления красных
 
 				}
 
-			} catch(System.Exception e)	{
+				score = score + 10;
 
-				print ("Error in removing objects List!\n" + e);
+				//if (tailObject.ElementAt (tailObject.Count - 2) != null) print("Remove obj:" + tailObject.ElementAt(tailObject.Count - 2).tag + " #" + (tailObject.Count - 2));
+				//if (tailObject.ElementAt (tailObject.Count - 3) != null) print("Remove obj:" + tailObject.ElementAt(tailObject.Count - 3).tag + " #" + (tailObject.Count - 3));
 
 			}
 
-			print ("tailObject size:  " + tailObject.Count + "; endOfTail size: " + endOfTail.Count);
+		} catch(System.Exception e)	{
 
-
-			//tailObject.Add(gameObject);
+			print ("Error in removing objects List!\n" + e);
 
 		}
 
 	}
 
-    public void SetCountText()	{
-		
-        ScoreText.text = "Score: " + score.ToString();
+	public void DestroyTailObjects()	{
+		// Если у нас 3 синих (в конце)
+		if (CheckTail () == "Blue") {
 
-    }
+			print ("TRUE !! tailObject size:  " + tailObject.Count + " BLUE!");
 
-}
+			DeleteEndOfTail ("Blue");
+
+		}
+		// Если у нас 3 зеленых (в конце)
+		if (CheckTail () == "Green") {
+
+			print ("TRUE !! tailObject size:  " + tailObject.Count + " Green!");
+
+			DeleteEndOfTail ("Green");
+
+		}
+		// Если у нас 3 красных (в конце)
+		if (CheckTail () == "Red") {
+
+			print ("Red Animation! ");
+
+			// Здесь нужно вставить анимацию (горение последних трех красных)
+
+			//			DeleteEndOfTail ("Red");
+
+		}
+		// Если у нас 3 красных + 1 рандом после (в конце)
+		if (CheckTail () == "RedPlus") {
+
+			print ("TRUE !! tailObject size:  " + tailObject.Count + " Red!");
+
+			DeleteEndOfTail ("RedPlus");
+
+		}
+
+	}
+
+    private IEnumerator TailDestruction(float waitTime)
+	{
+    	yield return new WaitForSeconds(waitTime);
+        DestroyObject(tailObject.ElementAt(tailObject.Count - 1));
+        tailObject.RemoveAt(tailObject.Count - 1);  
+		BlueBonus ();
+		score = score + (10*multi);
+		//if (tailObject.ElementAt (tailObject.Count - 2) != null) print("Remove obj:" + tailObject.ElementAt(tailObject.Count - 2).tag + " #" + (tailObject.Count - 2));
+		//if (tailObject.ElementAt (tailObject.Count - 3) != null) print("Remove obj:" + tailObject.ElementAt(tailObject.Count - 3).tag + " #" + (tailObject.Count - 3));
+
+	}
+
+} 
+
